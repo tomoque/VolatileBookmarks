@@ -1,0 +1,344 @@
+/* 基本設定 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* 明るいグレーの背景 */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 画面の高さ全体を使う */
+}
+
+/* ヘッダー */
+header {
+    background-color: #007bff; /* 青色のヘッダー */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* メインコンテンツエリア */
+main {
+    flex-grow: 1; /* フッターを下に押し出す */
+    padding: 20px;
+    max-width: 800px; /* 最大幅を設定して中央寄せ */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* 各セクションの見出し */
+h2 {
+    color: #0056b3;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* ボタン */
+button {
+    background-color: #28a745; /* 緑色のボタン */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* 新しいURLを登録ボタンがブロック要素 */
+    margin: 20px auto; /* 中央寄せ */
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* アラートエリア */
+#alertArea {
+    background-color: #fff3cd; /* 薄い黄色の背景 */
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: none; /* 最初は非表示 */
+}
+
+#alertArea p {
+    margin: 0;
+}
+
+/* ブックマークリスト */
+#bookmark-list {
+    list-style: none;
+    padding: 0;
+}
+
+#bookmark-list li {
+    background-color: #f8f9fa; /* 薄いグレーの背景 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* 削除ボタンの位置決め用 */
+    transition: background-color 0.2s ease;
+}
+
+#bookmark-list li:hover {
+    background-color: #e9ecef;
+}
+
+#bookmark-list li a {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+#bookmark-list li a:hover {
+    text-decoration: underline;
+}
+
+#bookmark-list li .url-display {
+    font-size: 0.9em;
+    color: #666;
+    word-break: break-all; /* 長いURLを改行 */
+}
+
+#bookmark-list li .meta-info {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+}
+
+.delete-button {
+    background-color: #dc3545; /* 赤色の削除ボタン */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+    position: absolute; /* リストアイテムの右上に配置 */
+    top: 10px;
+    right: 10px;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* フッター (広告エリア) */
+footer {
+    background-color: #343a40; /* 濃いグレーのフッター */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky; /* スクロールしても追従 */
+    bottom: 0;
+    width: 100%;
+}
+
+.ad-placeholder {
+    background-color: #555;
+    color: #eee;
+    padding: 10px;
+    min-height: 50px; /* 広告の高さの目安 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+/* モーダル (URL登録フォーム) */
+.modal {
+    display: none; /* 最初は非表示 */
+    position: fixed; /* 画面に固定 */
+    z-index: 1; /* 他の要素の上に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* コンテンツがはみ出したらスクロール */
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒い背景 */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #007bff;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal-content form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.modal-content form input[type="url"],
+.modal-content form input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.modal-content form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* 青色の登録ボタン */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.modal-content form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.bookmarklet-tip {
+    background-color: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bookmarklet-tip a {
+    display: inline-block;
+    background-color: #ffc107; /* 黄色のブックマークレットボタン */
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.bookmarklet-tip a:hover {
+    background-color: #e0a800;
+}
+
+/* URL遷移警告モーダル */
+#urlWarningModal {
+    display: none; /* 最初は非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+#urlWarningModal .modal-content {
+    text-align: center;
+}
+
+#urlWarningModal .modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+#urlWarningModal #confirmGoButton {
+    background-color: #007bff;
+}
+
+#urlWarningModal #confirmGoButton:hover {
+    background-color: #0056b3;
+}
+
+#urlWarningModal #cancelGoButton {
+    background-color: #6c757d;
+}
+
+#urlWarningModal #cancelGoButton:hover {
+    background-color: #5a6268;
+}
+
+/* 設定モーダル内の新しい入力要素 */
+.setting-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.setting-group input[type="number"] {
+    width: 80px; /* 数値入力欄の幅を調整 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-right: 10px;
+    text-align: right; /* 数値を右寄せ */
+}
+
+.setting-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #f8f8f8;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>揮発性ブックマーク</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <header>
+        <h1>揮発性ブックマーク</h1>
+    </header>
+
+    <main>
+        <section id="main-controls">
+            <button id="showAddFormButton">新しいURLを登録</button>
+            <button id="showSettingsButton">設定</button> <div id="alertArea">
+                </div>
+        </section>
+
+        <section id="bookmarkListSection">
+            <h2>登録済みブックマーク</h2>
+            <ul id="bookmark-list">
+                </ul>
+        </section>
+    </main>
+
+    <footer id="ad-footer">
+        <div class="ad-placeholder">広告表示エリア</div>
+    </footer>
+
+    <div id="addBookmarkModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>URL登録</h2>
+            <p class="bookmarklet-tip">
+                💡 現在開いているページを登録するには、下のボタンをブックマークバーにドラッグ＆ドロップしてください。<br>
+                <a href="javascript:(function(){var url=encodeURIComponent(window.location.href);var title=encodeURIComponent(document.title);var appUrl='https://tomoque.github.io/VolatileBookmarks/'; window.open(appUrl+'?url='+url+'&title='+title,'_blank');})();" class="bookmarklet-button" title="このボタンをブックマークバーにドラッグ">揮発性ブックマークに登録</a>
+            </p>
+            <form id="addBookmarkForm">
+                <label for="urlInput">URL:</label>
+                <input type="url" id="urlInput" placeholder="例: https://example.com" required>
+
+                <label for="titleInput">WEBサイト名 (任意):</label>
+                <input type="text" id="titleInput" placeholder="例: 例のサイト">
+
+                <button type="submit">登録</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="urlWarningModal" class="modal">
+        <div class="modal-content">
+            <h2>外部サイトへ遷移します</h2>
+            <p>このURLはシークレットブラウザ（プライベートブラウジングモード）での閲覧を推奨します。</p>
+            <p>現在のブラウザの履歴に残る可能性があります。手動でシークレットモードを開き、URLをコピー＆ペーストするか、通常のタブで開くか選択してください。</p>
+            <button id="confirmGoButton">通常のタブで開く</button>
+            <button id="cancelGoButton">キャンセル</button>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeSettingsButton">&times;</span>
+            <h2>設定</h2>
+            <form id="settingsForm">
+                <label for="expirationValueInput">ブックマークの消滅期間:</label>
+                <div class="setting-group">
+                    <input type="number" id="expirationValueInput" value="3" min="1" required>
+                    <select id="expirationUnitSelect">
+                        <option value="seconds">秒</option>
+                        <option value="minutes">分</option>
+                        <option value="hours">時間</option>
+                        <option value="days" selected>日</option>
+                        <option value="months">ヶ月</option>
+                        <option value="years">年</option>
+                    </select>
+                </div>
+
+                <label for="alertValueInput">消滅前アラートのタイミング:</label>
+                <div class="setting-group">
+                    <input type="number" id="alertValueInput" value="1" min="0" required>
+                    <select id="alertUnitSelect">
+                        <option value="seconds">秒</option>
+                        <option value="minutes">分</option>
+                        <option value="hours">時間</option>
+                        <option value="days" selected>日</option>
+                        <option value="months">ヶ月</option>
+                        <option value="years">年</option>
+                    </select>
+                </div>
+
+                <button type="submit">設定を保存</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="titlePromptModal" class="modal">
+        <div class="modal-content">
+            <h2>WEBサイト名を入力</h2>
+            <p>ブックマークレットからの登録です。WEBサイト名を入力してください。入力しない場合はURLのドメインがタイトルになります。</p>
+            <input type="text" id="titlePromptInput" placeholder="例: 例のサイト">
+            <button id="titlePromptConfirmButton">登録</button>
+            <button id="titlePromptSkipButton">スキップして登録</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
